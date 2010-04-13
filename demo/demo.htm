@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../lib/jquery_pagination/pagination.css" />
+        <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="../lib/jquery_pagination/jquery.pagination.js">
+        </script>
+        <script type="text/javascript">
+        
+            // This is a very simple demo that shows how a range of elements can
+            // be paginated.
+        
+            /**
+             * Callback function that displays the content.
+             *
+             * Gets called every time the user clicks on a pagination link.
+             *
+             * @param {int}page_index New Page index
+             * @param {jQuery} jq the container with the pagination links as a jQuery object
+             */
+			function pageselectCallback(page_index, jq){
+                var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
+                $('#Searchresult').empty().append(new_content);
+                return false;
+            }
+           
+            /** 
+             * Callback function for the AJAX content loader.
+             */
+            function initPagination() {
+                var num_entries = $('#hiddenresult div.result').length;
+                // Create pagination element
+                $("#Pagination").pagination(num_entries, {
+                    num_edge_entries: 2,
+                    num_display_entries: 8,
+                    callback: pageselectCallback,
+                    items_per_page:1
+                });
+             }
+                    
+            // Load HTML snippet with AJAX and insert it into the Hiddenresult element
+            // When the HTML has loaded, call initPagination to paginate the elements        
+            $(document).ready(function(){      
+                initPagination();
+            });
+            
+            
+            
+        </script>
+        <style type="text/css">
+         <!--
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #fff;
+            margin: 20px;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+		
+		h1 {
+			margin-bottom:10px;
+			font-size:1.5em;
+		}
+        
+		#Searchresult {
+			margin-top:15px;
+			margin-bottom:15px;
+			border:solid 1px #eef;
+			padding:5px;
+			background:#eef;
+            width:40%;
+		}
+        
+        #Searchresult p { margin-bottom:1.4em;}
+		
+		#footer {
+			margin-top:20px;
+			font-size:60%;
+			color:#15B;
+		}
+		
+        -->
+        </style>
+		
+        <title>Pagination</title>
+    </head>
+    <body>
+    	<h1>jQuery Pagination Plugin Demo</h1>
+        <div id="Pagination" class="pagination">
+        </div>
+		<br style="clear:both;" />
+		<div id="Searchresult">
+			This content will be replaced when pagination inits.
+		</div>
+        
+        <!-- Container element for all the Elements that are to be paginated -->
+        <div id="hiddenresult" style="display:none;">
+            <div class="result"><p>Globally maximize granular
+                "outside the box" thinking vis-a-vis quality niches. Proactively formulate 24/7
+                results whereas 2.0 catalysts for change. Professionally implement 24/365 niches
+                rather than client-focused users.</p>
+                <p>
+                Competently engineer high-payoff "outside the box" thinking through cross
+                functional benefits. Proactively transition intermandated processes through
+                open-source niches. Progressively engage maintainable innovation and extensible
+                interfaces.</p>
+            </div>
+            <div class="result"><p>Credibly fabricate e-business models for end-to-end niches.
+                Compellingly disseminate integrated e-markets without ubiquitous services.
+                Credibly create equity invested channels with multidisciplinary human capital.</p>
+                <p>
+                Interactively integrate competitive users rather than fully tested
+                infomediaries. Seamlessly initiate premium functionalities rather than impactful
+                architectures. Rapidiously leverage existing resource-leveling processes via
+                user-centric portals.</p> 
+            </div>
+            <div class="result"><p>Monotonectally initiate unique
+                e-services vis-a-vis client-centric deliverables. Quickly impact parallel
+                opportunities with B2B bandwidth. Synergistically streamline client-focused
+                infrastructures rather than B2C e-commerce.</p>
+                <p>
+                Phosfluorescently fabricate 24/365 e-business through 24/365 total linkage.
+                Completely facilitate high-quality systems without stand-alone strategic theme
+                areas.</p>
+             </div>
+        </div>
+        
+		<div id="footer">
+			Copyright &copy; 2008 by <a href="http://www.d-scribe.de/">describe europe Ltd.</a>.
+		</div>
+    </body>
+</html>
