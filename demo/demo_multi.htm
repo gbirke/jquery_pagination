@@ -9,11 +9,15 @@
         </script>
         <script type="text/javascript">
         
-            // This is a very simple demo that shows how a range of elements can
-            // be paginated.
+            // This is a demo that shows 
+            // a) how to have pagination for the same content multiple times
+            // b) two independent pagination elements
+            
             // The elements that will be displayed are in a hidden DIV and are
             // cloned for display. The elements are static, there are no Ajax 
             // calls involved.
+            // The elements for the second example are not cloned. Instead, the
+            // elements are hidden and the current element is shown.
         
             /**
              * Callback function that displays the content.
@@ -36,7 +40,7 @@
                 // count entries inside the hidden content
                 var num_entries = $('#hiddenresult div.result').length;
                 // Create content inside pagination element
-                $("#Pagination").pagination(num_entries, {
+                $(".searchresult_pagination").pagination(num_entries, {
                     callback: pageselectCallback,
                     items_per_page:1 // Show only one item per page
                 });
@@ -88,14 +92,17 @@
         
         -->
         </style>
+        
     </head>
     <body>
         <h1>jQuery Pagination Plugin Demo</h1>
-        <div id="Pagination" class="pagination">
+        <div class="pagination searchresult_pagination">
         </div>
         <br style="clear:both;" />
         <div id="Searchresult">
             This content will be replaced when pagination inits.
+        </div>
+        <div class="pagination searchresult_pagination">
         </div>
         
         <!-- Container element for all the Elements that are to be paginated -->
