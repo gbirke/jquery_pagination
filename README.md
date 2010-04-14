@@ -103,9 +103,9 @@ ellipse_text
 
 Version history
 ---------------
-1.0 - inital release
-1.1 - Fixed a bug when the click on a pagination item was propagated to the browser.
-1.2 - Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with
+1.0 - inital release   
+1.1 - Fixed a bug when the click on a pagination item was propagated to the browser.   
+1.2 - Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with   
       jQuery 1.3.1
     
 TODO
