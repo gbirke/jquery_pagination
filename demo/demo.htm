@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" href="../lib/jquery_pagination/pagination.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Pagination Demo I - Simple pagination</title>
+        <link rel="stylesheet" href="../lib/jquery_pagination/pagination.css" />
         <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="../lib/jquery_pagination/jquery.pagination.js">
         </script>
@@ -10,6 +11,9 @@
         
             // This is a very simple demo that shows how a range of elements can
             // be paginated.
+            // The elements that will be displayed are in a hidden DIV and are
+            // cloned for display. The elements are static, there are no Ajax 
+            // calls involved.
         
             /**
              * Callback function that displays the content.
@@ -19,28 +23,26 @@
              * @param {int}page_index New Page index
              * @param {jQuery} jq the container with the pagination links as a jQuery object
              */
-			function pageselectCallback(page_index, jq){
+            function pageselectCallback(page_index, jq){
                 var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
                 $('#Searchresult').empty().append(new_content);
                 return false;
             }
            
             /** 
-             * Callback function for the AJAX content loader.
+             * Initialisation function for pagination
              */
             function initPagination() {
+                // count entries inside the hidden content
                 var num_entries = $('#hiddenresult div.result').length;
-                // Create pagination element
+                // Create content inside pagination element
                 $("#Pagination").pagination(num_entries, {
-                    num_edge_entries: 2,
-                    num_display_entries: 8,
                     callback: pageselectCallback,
-                    items_per_page:1
+                    items_per_page:1 // Show only one item per page
                 });
              }
-                    
-            // Load HTML snippet with AJAX and insert it into the Hiddenresult element
-            // When the HTML has loaded, call initPagination to paginate the elements        
+            
+            // When document is ready, initialize pagination
             $(document).ready(function(){      
                 initPagination();
             });
@@ -61,42 +63,42 @@
             height: 100%;
             font-family: Arial, Helvetica, sans-serif;
         }
-		
-		h1 {
-			margin-bottom:10px;
-			font-size:1.5em;
-		}
         
-		#Searchresult {
-			margin-top:15px;
-			margin-bottom:15px;
-			border:solid 1px #eef;
-			padding:5px;
-			background:#eef;
+        h1 {
+            margin-bottom:10px;
+            font-size:1.5em;
+        }
+        
+        #Searchresult {
+            margin-top:15px;
+            margin-bottom:15px;
+            border:solid 1px #eef;
+            padding:5px;
+            background:#eef;
             width:40%;
-		}
+        }
         
         #Searchresult p { margin-bottom:1.4em;}
-		
-		#footer {
-			margin-top:20px;
-			font-size:60%;
-			color:#15B;
-		}
-		
+        
+        #footer {
+            margin-top:20px;
+            font-size:60%;
+            color:#15B;
+        }
+        
         -->
         </style>
-		
+        
         <title>Pagination</title>
     </head>
     <body>
-    	<h1>jQuery Pagination Plugin Demo</h1>
+        <h1>jQuery Pagination Plugin Demo</h1>
         <div id="Pagination" class="pagination">
         </div>
-		<br style="clear:both;" />
-		<div id="Searchresult">
-			This content will be replaced when pagination inits.
-		</div>
+        <br style="clear:both;" />
+        <div id="Searchresult">
+            This content will be replaced when pagination inits.
+        </div>
         
         <!-- Container element for all the Elements that are to be paginated -->
         <div id="hiddenresult" style="display:none;">
@@ -130,8 +132,8 @@
              </div>
         </div>
         
-		<div id="footer">
-			Copyright &copy; 2008 by <a href="http://www.d-scribe.de/">describe europe Ltd.</a>.
-		</div>
+        <div id="footer">
+            Copyright &copy; 2010 by <a href="http://www.d-scribe.de/">describe europe Ltd.</a>.
+        </div>
     </body>
 </html>
