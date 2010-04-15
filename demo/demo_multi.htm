@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Pagination Demo I - Simple pagination</title>
+        <title>Pagination Demo II - Multiple pagination</title>
         <link rel="stylesheet" href="../lib/jquery_pagination/pagination.css" />
         <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="../lib/jquery_pagination/jquery.pagination.js">
@@ -27,10 +27,19 @@
              * @param {int} page_index New Page index
              * @param {jQuery} jq the container with the pagination links as a jQuery object
              */
-            function pageselectCallback(page_index, jq){
+            function searchPageselectCallback(page_index, jq){
                 var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
                 $('#Searchresult').empty().append(new_content);
                 return false;
+            }
+            
+            /**
+             * Callback function for the image container
+             */
+            function imagePageselectCallback(page_index, jq) {
+                 $('#ImageContainer img:visible').hide();
+                 $('#ImageContainer img:eq(' + page_index + ')').show(); 
+                
             }
            
             /** 
@@ -41,7 +50,13 @@
                 var num_entries = $('#hiddenresult div.result').length;
                 // Create content inside pagination element
                 $(".searchresult_pagination").pagination(num_entries, {
-                    callback: pageselectCallback,
+                    callback: searchPageselectCallback,
+                    items_per_page:1 // Show only one item per page
+                });
+                // Create pagination for images
+                num_entries = $('#ImageContainer img').length;
+                $("#ImagePagination").pagination(num_entries, {
+                    callback: imagePageselectCallback,
                     items_per_page:1 // Show only one item per page
                 });
              }
@@ -73,6 +88,11 @@
             font-size:1.5em;
         }
         
+        h2 {
+            margin:30px 0 10px 0;
+            font-size:1em;
+        }
+        
         #Searchresult {
             margin-top:15px;
             margin-bottom:15px;
@@ -80,9 +100,19 @@
             padding:5px;
             background:#eef;
             width:40%;
+            height:200px;
         }
         
         #Searchresult p { margin-bottom:1.4em;}
+        
+        #ImageContainer {
+            height:125px;
+            width:200px;
+            border:solid 1px #ccc;
+            margin-bottom:10px;
+        }
+        
+        #ImageContainer img {display:none;}
         
         #footer {
             margin-top:20px;
@@ -95,16 +125,27 @@
         
     </head>
     <body>
-        <h1>jQuery Pagination Plugin Demo</h1>
-        <div class="pagination searchresult_pagination">
-        </div>
+        <h1>jQuery Multiple Pagination Plugin Demo</h1>
+        <h2>Search result</h1>
+        <div class="pagination searchresult_pagination"></div>
         <br style="clear:both;" />
         <div id="Searchresult">
             This content will be replaced when pagination inits.
         </div>
-        <div class="pagination searchresult_pagination">
-        </div>
+        <div class="pagination searchresult_pagination"></div>
+        <br style="clear:left;">
         
+        <h2>Image Gallery</h2>
+        <div id="ImageContainer">
+            <img src="images/abstract1.jpg" alt="abstract pattern 1" />
+            <img src="images/abstract2.jpg" alt="abstract pattern 2" />
+            <img src="images/abstract3.jpg" alt="abstract pattern 3" />
+            <img src="images/abstract4.jpg" alt="abstract pattern 4" />
+            <img src="images/abstract5.jpg" alt="abstract pattern 5" />
+            <img src="images/abstract6.jpg" alt="abstract pattern 6" />
+        </div>
+        <div id="ImagePagination" class="pagination"></div>
+        <br style="clear:left;">
         <!-- Container element for all the Elements that are to be paginated -->
         <div id="hiddenresult" style="display:none;">
             <div class="result"><p>Globally maximize granular
