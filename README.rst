@@ -7,18 +7,16 @@ When you have a a large list of items (e.g. search results or news articles),
 you can display them grouped in pages and present navigational elements to move 
 from one page to another. This plugin creates these navigational elements. 
 
-
 Usage
 -----
-Include jQuery, the pagination plugin script and the pagination.css file in your 
-HTML page. In your HTML body create a container tag pair that will hold the link 
-elements. Give it an id attribute (e.g. "News-Pagination"). This id will be the
-selector for jQuery. It is important to select only one element because the
-pagination links won't be synchronized!
+Include jQuery, the pagination plugin script and the pagination.css file in
+your HTML page. In your HTML body create a container tag pair that will hold
+the link elements. Give it an id or class attribute (e.g. "News-Pagination").
+This attribute can used as the selector for jQuery.
 
 Next, write a JavaScript function that has two parameters: page_index and
 paging_container. This is the callback function where you react to clicks on the
-pagination links. It should select a part from your content, depending on the
+pagination links. It should select a slice from your content, depending on the
 page id.::
 
     function handlePaginationClick(new_page_index, pagination_container) {
@@ -32,8 +30,8 @@ page id.::
 The code in this callback function requires knowledge of the jQuery DOM
 manipulation functions. This is where you write your display routines.
     
-After you have loaded the contents and know how many items you want to display 
-overall, create the pagination like this:::
+In the initialisation function of your page, when you know how many items you
+want to display overall, create the pagination element like this:::
 
 	// First Parameter: number of items
 	// Second Parameter: options object
@@ -113,15 +111,35 @@ ellipse_text
 
 Version history
 ---------------
-| 1.0 - inital release   
-| 1.1 - Fixed a bug when the click on a pagination item was propagated to the browser.   
-| 1.2 - Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with jQuery 1.3.1
-    
-TODO
-----
-   * Optionally synchronize several pagination containers when a paginations 
-     link is clicked.
+Version 1.0 
++++++++++++
+Inital release   
+
+Version 1.1 
++++++++++++
+Fixed a bug when the click on a pagination item was propagated to the browser.   
+
+Version 1.2 
++++++++++++
+Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with 
+jQuery 1.3.1
+
+Version 2.0
++++++++++++
+  - Complete, more object-oriented rewrite
+  - Now requires jQuery 1.4. Tested with jQuery 1.4.2
+  - Support for several synchronized pagination containers
+  
+Future Plans
+------------
    * Optional links for jumping a fixed number of pages.
+   * Trigger events when a page is selected.
+   * More renderers for rendering the Pagination elements differently.
+   * Documentation and examples how you implement your own renderers.
+
+I'll implement these features as I see fit and when my time allows it. If 
+you'd like to see any of those features *now*, feel free to contact me and we 
+can discuss a reasonable fee.
 
 License and Contact Information
 -------------------------------
