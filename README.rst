@@ -136,6 +136,7 @@ Future Plans
    * Trigger events when a page is selected.
    * More renderers for rendering the Pagination elements differently.
    * Documentation and examples how you implement your own renderers.
+   * Write unit tests and use QUnit instead of JSUnit.
 
 I'll implement these features as I see fit and when my time allows it. If 
 you'd like to see any of those features *now*, feel free to contact me and we 
@@ -145,6 +146,8 @@ License and Contact Information
 -------------------------------
 This plugin is licensed under the GPL v2. You can find the full license text 
 here: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
+Source code: http://github.com/gbirke/jquery_pagination
 
 You can reach me at:
 
