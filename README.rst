@@ -68,8 +68,11 @@ current_page
 	The page that is selected when the pagination is initialized. Default: 0
 	
 items_per_page
-	The number of items per page. The maximum number of pages is calculated by 
-	dividing the number of items by items_per_page (rounded up, minimum 1). 
+	The number of items per page. The maximum number of pages is calculated by
+	dividing the number of items by items_per_page (rounded up, minimum 1).
+	**Please note:** This value is only for calculating the number of pages. 
+	The actual selection of the items correlating to thhe current page and
+	number of items must be done by your code in your callback function!
 	Default: 10
 	
 link_to
