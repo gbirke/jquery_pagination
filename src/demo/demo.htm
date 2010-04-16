@@ -25,7 +25,7 @@
              * @param {jQuery} jq the container with the pagination links as a jQuery object
              */
             function pageselectCallback(page_index, jq){
-                var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
+                var new_content = jQuery('#hiddenresult div.result:eq('+page_index+')').clone();
                 $('#Searchresult').empty().append(new_content);
                 return false;
             }
@@ -35,7 +35,7 @@
              */
             function initPagination() {
                 // count entries inside the hidden content
-                var num_entries = $('#hiddenresult div.result').length;
+                var num_entries = jQuery('#hiddenresult div.result').length;
                 // Create content inside pagination element
                 $("#Pagination").pagination(num_entries, {
                     callback: pageselectCallback,

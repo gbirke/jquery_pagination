@@ -19,7 +19,7 @@
     </target>
     
     <target name="dist" depends="check">
-        <mkdir dir="${build.dist.dir}" />
+        <mkdir dir="${build.dir}" />
         <!-- TODO: Add version number to zip file -->
         <zip destfile="${build.dir}/${ant.project.name}.zip">
             <fileset dir="${src.dir}" />

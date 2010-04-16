@@ -1,7 +1,7 @@
 /**
  * This jQuery plugin displays pagination links inside the selected elements.
  * 
- * This plugin need at least jQuery 1.4.2
+ * This plugin needs at least jQuery 1.4.2
  *
  * @author Gabriel Birke (birke *at* d-scribe *dot* de)
  * @version 2.0rc
@@ -9,9 +9,7 @@
  * @param {Object} opts Several options (see README for documentation)
  * @return {Object} jQuery Object
  */
- 
  (function($){
-	
 	/**
 	 * @class Class for calculating pagination values
 	 */
@@ -19,6 +17,7 @@
 		this.maxentries = maxentries;
 		this.opts = opts;
 	}
+	
 	$.extend($.PaginationCalculator.prototype, {
 		/**
 		 * Calculate the maximum number of pages
@@ -37,7 +36,7 @@
 			var ne_half = Math.ceil(this.opts.num_display_entries/2);
 			var np = this.numPages();
 			var upper_limit = np - this.opts.num_display_entries;
-			var start = current_page > ne_half ? Math.max(Math.min(current_page-ne_half, upper_limit), 0):0;
+			var start = current_page > ne_half ? Math.max( Math.min(current_page - ne_half, upper_limit), 0 ) : 0;
 			var end = current_page > ne_half?Math.min(current_page+ne_half, np):Math.min(this.opts.num_display_entries, np);
 			return {start:start, end:end};
 		}
@@ -49,16 +48,16 @@
 	/**
 	 * @class Default renderer for rendering pagination links
 	 */
-	$.PaginationRenderers.default = function(maxentries, opts) {
+	$.PaginationRenderers.defaultRenderer = function(maxentries, opts) {
 		this.maxentries = maxentries;
 		this.opts = opts;
 		this.pc = new $.PaginationCalculator(maxentries, opts);
 	}
-	$.extend($.PaginationRenderers.default.prototype, {
+	$.extend($.PaginationRenderers.defaultRenderer.prototype, {
 		/**
 		 * Helper function for generating a single link (or a span tag if it's the current page)
 		 * @param {Number} page_id The page id for the new item
- 		 * @param {Number} current_page 
+		 * @param {Number} current_page 
 		 * @param {Object} appendopts Options for the new item: text and classes
 		 * @returns {jQuery} jQuery object containing the link
 		 */
@@ -86,8 +85,8 @@
 			}
 		},
 		getLinks:function(current_page, eventHandler) {
-			var begin, end, i,
-			 	interval = this.pc.getInterval(current_page),
+			var begin, end,
+				interval = this.pc.getInterval(current_page),
 				np = this.pc.numPages(),
 				fragment = $("<div class='pagination'></div>");
 			
@@ -142,7 +141,7 @@
 		ellipse_text:"...",
 		prev_show_always:true,
 		next_show_always:true,
-		renderer:"default",
+		renderer:"defaultRenderer",
 		callback:function(){return false;}
 	},opts||{});
 	
@@ -218,4 +217,3 @@
 }
 
 })(jQuery);
-
