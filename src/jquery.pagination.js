@@ -1,8 +1,10 @@
 /**
  * This jQuery plugin displays pagination links inside the selected elements.
+ * 
+ * This plugin need at least jQuery 1.4.2
  *
  * @author Gabriel Birke (birke *at* d-scribe *dot* de)
- * @version 2.0
+ * @version 2.0rc
  * @param {int} maxentries Number of entries to paginate
  * @param {Object} opts Several options (see README for documentation)
  * @return {Object} jQuery Object

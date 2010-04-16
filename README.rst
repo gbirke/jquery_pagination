@@ -124,7 +124,7 @@ Version 1.2
 Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with 
 jQuery 1.3.1
 
-Version 2.0
+Version 2.0rc1
 +++++++++++
   - Complete, more object-oriented rewrite
   - Now requires jQuery 1.4. Tested with jQuery 1.4.2
@@ -142,10 +142,14 @@ I'll implement these features as I see fit and when my time allows it. If
 you'd like to see any of those features *now*, feel free to contact me and we 
 can discuss a reasonable fee.
 
+I'd be glad if you could send me a notice where you use jQuery Pagination. 
+Knowing common use cases will help me to improve the plugin in the future.
+
 License and Contact Information
 -------------------------------
 This plugin is licensed under the GPL v2. You can find the full license text 
 here: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+If you need another license, ask me.
 
 Source code: http://github.com/gbirke/jquery_pagination
 
