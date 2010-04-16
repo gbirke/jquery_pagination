@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!--ant-->
+<project name="jquery.pagination" basedir=".">
+    
+	<!-- Created by Gabriel Birke on 2010-04-16. -->
+	<!-- Copyright (c) 2010 describe europe Ltd. All rights reserved. -->
+    
+    <property name="src.dir" value="${basedir}/src" />
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="build.dist.dir" value="${build.dir}/${ant.project.name}" />
+    
+    <fileset id="js.src" dir="${src.dir}" includes="*.js" />
+
+    <target name="check" description="Check code for coding standard violations">
+        <fail message="File contains console command. Console is not available in all browsers.">
+            <condition>
+                <resourcecontains refid="js.src" substring="console" />
+            </condition>
+        </fail>
+    </target>
+    
+    <target name="dist" depends="check">
+        <mkdir dir="${build.dist.dir}" />
+        <!-- TODO: Add version number to zip file -->
+        <zip destfile="${build.dir}/${ant.project.name}.zip">
+            <fileset dir="${src.dir}" />
+            <!-- TODO: Build HTML instead -->
+            <fileset dir="${basedir}" includes="README.rst" />
+        </zip>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+        
+
+</project>
