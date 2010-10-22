@@ -61,7 +61,7 @@ callback
 	This callback function is essential for the functionality of the pagination!
 	It should contain code that updates your content.
 	For a fast user experience you should NOT load content via AJAX in this 
-	function. Instead, pre-load some content pages and switch betweem them with
+	function. Instead, pre-load some content pages and switch between them with
 	this function.
     
 current_page
@@ -71,7 +71,7 @@ items_per_page
 	The number of items per page. The maximum number of pages is calculated by
 	dividing the number of items by items_per_page (rounded up, minimum 1).
 	**Please note:** This value is only for calculating the number of pages. 
-	The actual selection of the items correlating to thhe current page and
+	The actual selection of the items correlating to the current page and
 	number of items must be done by your code in your callback function!
 	Default: 10
 	
@@ -82,7 +82,8 @@ link_to
 	
 num_display_entries
 	Maximum number of pagination links that are visible. Set to 0 to display a
-	simple "Previous/Next"-Navigation. Default: 10
+	simple "Previous/Next"-Navigation. Set to an odd number for maximum 
+	symmetry and aesthetic pleasure. Default: 11
 	
 next_text
 	Text for the "Next"-link that increases the current page number by 1. 
@@ -128,11 +129,21 @@ Fixed bug with jQuery.noConflict(). Wrote better demo files. Tested with
 jQuery 1.3.1
 
 Version 2.0rc1
-+++++++++++
+++++++++++++++
   - Complete, more object-oriented rewrite
   - Now requires jQuery 1.4. Tested with jQuery 1.4.2
   - Support for several synchronized pagination containers
   
+Version 2.0rc2
+++++++++++++++
+  - Bugfix. Renderer used restricted keyword "default"
+
+Version 2.0.1
+++++++++++++++
+  - Bugfix for Github Issue #1, found by Cody Lindley
+  - Small text corrections
+  - Start end end points now have classes.
+
 Future Plans
 ------------
    * Optional links for jumping a fixed number of pages.
