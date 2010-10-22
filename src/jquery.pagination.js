@@ -4,7 +4,7 @@
  * This plugin needs at least jQuery 1.4.2
  *
  * @author Gabriel Birke (birke *at* d-scribe *dot* de)
- * @version 2.0rc
+ * @version 2.0.1
  * @param {int} maxentries Number of entries to paginate
  * @param {Object} opts Several options (see README for documentation)
  * @return {Object} jQuery Object
@@ -33,11 +33,11 @@
 		 * @returns {Array}
 		 */
 		getInterval:function(current_page)  {
-			var ne_half = Math.ceil(this.opts.num_display_entries/2);
+			var ne_half = Math.floor(this.opts.num_display_entries/2);
 			var np = this.numPages();
 			var upper_limit = np - this.opts.num_display_entries;
 			var start = current_page > ne_half ? Math.max( Math.min(current_page - ne_half, upper_limit), 0 ) : 0;
-			var end = current_page > ne_half?Math.min(current_page+ne_half, np):Math.min(this.opts.num_display_entries, np);
+			var end = current_page > ne_half?Math.min(current_page+ne_half + (this.opts.num_display_entries % 2), np):Math.min(this.opts.num_display_entries, np);
 			return {start:start, end:end};
 		}
 	});
@@ -78,10 +78,10 @@
 			return lnk;
 		},
 		// Generate a range of numeric links 
-		appendRange:function(container, current_page, start, end) {
+		appendRange:function(container, current_page, start, end, opts) {
 			var i;
 			for(i=start; i<end; i++) {
-				this.createLink(i, current_page).appendTo(container);
+				this.createLink(i, current_page, opts).appendTo(container);
 			}
 		},
 		getLinks:function(current_page, eventHandler) {
@@ -98,7 +98,7 @@
 			if (interval.start > 0 && this.opts.num_edge_entries > 0)
 			{
 				end = Math.min(this.opts.num_edge_entries, interval.start);
-				this.appendRange(fragment, current_page, 0, end);
+				this.appendRange(fragment, current_page, 0, end, {classes:'sp'});
 				if(this.opts.num_edge_entries < interval.start && this.opts.ellipse_text)
 				{
 					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
@@ -114,7 +114,7 @@
 					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
 				}
 				begin = Math.max(np-this.opts.num_edge_entries, interval.end);
-				this.appendRange(fragment, current_page, begin, np);
+				this.appendRange(fragment, current_page, begin, np, {classes:'ep'});
 				
 			}
 			// Generate "Next"-Link
@@ -132,7 +132,7 @@
 		// Initialize options with default values
 		opts = jQuery.extend({
 			items_per_page:10,
-			num_display_entries:10,
+			num_display_entries:11,
 			current_page:0,
 			num_edge_entries:0,
 			link_to:"#",
