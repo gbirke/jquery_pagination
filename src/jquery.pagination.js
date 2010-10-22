@@ -129,25 +129,24 @@
 	// Extend jQuery
 	$.fn.pagination = function(maxentries, opts){
 		
-    // Initialize options with default values
-	opts = jQuery.extend({
-		items_per_page:10,
-		num_display_entries:10,
-		current_page:0,
-		num_edge_entries:0,
-		link_to:"#",
-		prev_text:"Prev",
-		next_text:"Next",
-		ellipse_text:"...",
-		prev_show_always:true,
-		next_show_always:true,
-		renderer:"defaultRenderer",
-		callback:function(){return false;}
-	},opts||{});
-	
-	var containers = this,
-		renderer, links, current_page;
-	
+		// Initialize options with default values
+		opts = jQuery.extend({
+			items_per_page:10,
+			num_display_entries:10,
+			current_page:0,
+			num_edge_entries:0,
+			link_to:"#",
+			prev_text:"Prev",
+			next_text:"Next",
+			ellipse_text:"...",
+			prev_show_always:true,
+			next_show_always:true,
+			renderer:"defaultRenderer",
+			callback:function(){return false;}
+		},opts||{});
+		
+		var containers = this,
+			renderer, links, current_page;
 		
 		/**
 		 * This is the event handling function for the pagination links. 
@@ -155,10 +154,12 @@
 		 */
 		function pageSelected(evt){
 			var links, current_page = $(evt.target).data('page_id');
+			// update the link display of a all containers
 			containers.data('current_page', current_page);
 			links = renderer.getLinks(current_page, pageSelected);
 			containers.empty();
 			links.appendTo(containers);
+			// call the callback and propagate the event if it does not return false
 			var continuePropagation = opts.callback(current_page, containers);
 			if (!continuePropagation) {
 				if (evt.stopPropagation) {
@@ -171,6 +172,9 @@
 			return continuePropagation;
 		}
 		
+		// -----------------------------------
+		// Initialize containers
+		// -----------------------------------
 		current_page = opts.current_page;
 		containers.data('current_page', current_page);
 		// Create a sane value for maxentries and items_per_page
@@ -183,37 +187,38 @@
 		}
 		renderer = new $.PaginationRenderers[opts.renderer](maxentries, opts);
 		
-		containers.each(function() {
 		// Attach control functions to the DOM element 
-		this.selectPage = function(page_id){ pageSelected(page_id);}
-		this.prevPage = function(){
-			var current_page = containers.data('current_page');
-			if (current_page > 0) {
-				pageSelected(current_page - 1);
-				return true;
+		// TODO: This creates memory leaks and does not work properly in some cases use events instead
+		containers.each(function() {
+			this.selectPage = function(page_id){ pageSelected(page_id);}
+			this.prevPage = function(){
+				var current_page = containers.data('current_page');
+				if (current_page > 0) {
+					pageSelected(current_page - 1);
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
-			else {
-				return false;
+			this.nextPage = function(){
+				var current_page = containers.data('current_page');
+				if(current_page < numPages()-1) {
+					pageSelected(current_page+1);
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
-		}
-		this.nextPage = function(){
-			var current_page = containers.data('current_page');
-			if(current_page < numPages()-1) {
-				pageSelected(current_page+1);
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
 		});
+		
 		// When all initialisation is done, draw the links
 		links = renderer.getLinks(current_page, pageSelected);
 		containers.empty();
 		links.appendTo(containers);
 		// call callback function
 		opts.callback(current_page, containers);
+	} // End of $.fn.pagination block
 	
-}
-
 })(jQuery);
