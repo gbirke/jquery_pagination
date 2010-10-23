@@ -119,7 +119,7 @@ There may be use cases where you want to change the pagination from your own
 JavaScript code. For example in a wizard or a questionnaire you skip pages if
 a certain option is not selected. Or clicking on images in an image gallery
 should trigger the "next page" event. For these use cases you use jQuery
-custom events like this:
+custom events like this:::
 
 	// Jump to the 5th page 
 	$("#News-Pagination").trigger('setPage', [4]);
