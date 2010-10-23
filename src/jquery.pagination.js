@@ -4,7 +4,7 @@
  * This plugin needs at least jQuery 1.4.2
  *
  * @author Gabriel Birke (birke *at* d-scribe *dot* de)
- * @version 2.0.1
+ * @version 2.1
  * @param {int} maxentries Number of entries to paginate
  * @param {Object} opts Several options (see README for documentation)
  * @return {Object} jQuery Object
@@ -152,23 +152,30 @@
 		 * This is the event handling function for the pagination links. 
 		 * @param {int} page_id The new page number
 		 */
-		function pageSelected(evt){
-			var links, current_page = $(evt.target).data('page_id');
+		function paginationClickHandler(evt){
+			var links, 
+				new_current_page = $(evt.target).data('page_id'),
+				continuePropagation = selectPage(new_current_page);
+			if (!continuePropagation) {
+				evt.stopPropagation();
+			}
+			return continuePropagation;
+		}
+		
+		/**
+		 * This is a utility function for the internal event handlers. 
+		 * It sets the new current page on the pagination container objects, 
+		 * generates a new HTMl fragment for the pagination links and calls
+		 * the callback function.
+		 */
+		function selectPage(new_current_page) {
 			// update the link display of a all containers
-			containers.data('current_page', current_page);
-			links = renderer.getLinks(current_page, pageSelected);
+			containers.data('current_page', new_current_page);
+			links = renderer.getLinks(new_current_page, paginationClickHandler);
 			containers.empty();
 			links.appendTo(containers);
 			// call the callback and propagate the event if it does not return false
-			var continuePropagation = opts.callback(current_page, containers);
-			if (!continuePropagation) {
-				if (evt.stopPropagation) {
-					evt.stopPropagation();
-				}
-				else {
-					evt.cancelBubble = true;
-				}
-			}
+			var continuePropagation = opts.callback(new_current_page, containers);
 			return continuePropagation;
 		}
 		
@@ -187,34 +194,31 @@
 		}
 		renderer = new $.PaginationRenderers[opts.renderer](maxentries, opts);
 		
-		// Attach control functions to the DOM element 
-		// TODO: This creates memory leaks and does not work properly in some cases use events instead
-		containers.each(function() {
-			this.selectPage = function(page_id){ pageSelected(page_id);}
-			this.prevPage = function(){
-				var current_page = containers.data('current_page');
+		// Attach control events to the DOM elements
+		var pc = new $.PaginationCalculator(maxentries, opts);
+		var np = pc.numPages();
+		containers.bind('setPage', {numPages:np}, function(evt, page_id) { 
+				if(page_id >= 0 && page_id < evt.data.numPages) {
+					selectPage(page_id); return false;
+				}
+		});
+		containers.bind('prevPage', function(evt){
+				var current_page = $(this).data('current_page');
 				if (current_page > 0) {
-					pageSelected(current_page - 1);
-					return true;
+					selectPage(current_page - 1);
 				}
-				else {
-					return false;
+				return false;
+		});
+		containers.bind('nextPage', {numPages:np}, function(evt){
+				var current_page = $(this).data('current_page');
+				if(current_page < evt.data.numPages - 1) {
+					selectPage(current_page + 1);
 				}
-			}
-			this.nextPage = function(){
-				var current_page = containers.data('current_page');
-				if(current_page < numPages()-1) {
-					pageSelected(current_page+1);
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
+				return false;
 		});
 		
 		// When all initialisation is done, draw the links
-		links = renderer.getLinks(current_page, pageSelected);
+		links = renderer.getLinks(current_page, paginationClickHandler);
 		containers.empty();
 		links.appendTo(containers);
 		// call callback function

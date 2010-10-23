@@ -113,6 +113,23 @@ ellipse_text
 	span tag). Can be left blank to avoid the additional tag. Default: ``...``
 
 
+Triggering pagination with custom events
+----------------------------------------
+There may be use cases where you want to change the pagination from your own
+JavaScript code. For example in a wizard or a questionnaire you skip pages if
+a certain option is not selected. Or clicking on images in an image gallery
+should trigger the "next page" event. For these use cases you use jQuery
+custom events like this:
+
+	// Jump to the 5th page 
+	$("#News-Pagination").trigger('setPage', [4]);
+	// Go to the next page
+	$("#News-Pagination").trigger('nextPage');
+	// Go to the previous page
+	$("#News-Pagination").trigger('prevPage');
+
+The event handlers check if the new page number is inside the boundaries of the number of pages and ignore the event if it is outside.
+
 Version history
 ---------------
 Version 1.0 
@@ -136,18 +153,24 @@ Version 2.0rc1
   
 Version 2.0rc2
 ++++++++++++++
-  - Bugfix. Renderer used restricted keyword "default"
+Bugfix. Renderer used restricted keyword "default"
 
 Version 2.0.1
-++++++++++++++
-  - Bugfix for Github Issue #1, found by Cody Lindley
++++++++++++++
+  - Bugfix for GitHub Issue #1, found by Cody Lindley
   - Small text corrections
   - Start end end points now have classes.
+
+Version 2.1
++++++++++++
+Pagination can now be controlled from you own JavaScript code by triggering
+custom events. See ``demo/demo_events.htm`` for an example.
 
 Future Plans
 ------------
    * Optional links for jumping a fixed number of pages.
    * Trigger events when a page is selected.
+   * Implement paginaton as a jQuery UI widget.
    * More renderers for rendering the Pagination elements differently.
    * Documentation and examples how you implement your own renderers.
    * Write unit tests and use QUnit instead of JSUnit.

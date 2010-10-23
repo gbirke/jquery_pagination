@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Pagination Demo IV - Pagination triggered through events</title>
+        <link rel="stylesheet" href="../pagination.css" />
+        <link rel="stylesheet" href="demo.css" />
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src="../jquery.pagination.js"></script>
+        
+        <script type="text/javascript">
+        
+            // This demo shows how other page elements can control the pagination
+            // widget by triggering custom events. Normally you would not use 
+            // buttons but react to some events in your other page objects.
+            
+            // One use case for this would be a wizard or questionnaire where 
+            // the user can skip pages depending on his actions.
+        
+            /**
+             * Callback function that displays the content.
+             *
+             * Gets called every time the user clicks on a pagination link.
+             *
+             * @param {int} page_index New Page index
+             * @param {jQuery} jq the container with the pagination links as a jQuery object
+             */
+            function pageselectCallback(page_index, jq){
+                var new_content = jQuery('#hiddenresult div.result:eq('+page_index+')').clone();
+                $('#Searchresult').empty().append(new_content);
+                return false;
+            }
+           
+            /** 
+             * Initialisation function for pagination
+             */
+            function initPagination() {
+                // count entries inside the hidden content
+                var num_entries = jQuery('#hiddenresult div.result').length;
+                // Create content inside pagination element
+                $("#Pagination").pagination(num_entries, {
+                    callback: pageselectCallback,
+                    items_per_page:1 // Show only one item per page
+                });
+             }
+             
+             /**
+              * Initialisation function for the control buttons
+              */
+             function initButtons() {
+               var pg = $('#Pagination');
+               $('#btnPrev').click(function(){
+                 pg.trigger('prevPage');
+               });
+               $('#btnNext').click(function(){
+                 $('#Pagination').trigger('nextPage');
+               });
+               $('#btnSet').click(function(){
+                   pg.trigger('setPage', [1]); // Note how you pass the page number as a parameter here.
+               });
+             }
+            
+            // When document is ready, initialize pagination and buttons
+            $(document).ready(function(){      
+                initPagination();
+                initButtons();
+            });
+            
+            
+            
+        </script>
+    </head>
+    <body>
+        <h1>jQuery Pagination Plugin Demo</h1>
+        <div id="Pagination"></div>
+        <br style="clear:both;" />
+        <div id="Searchresult">
+            This content will be replaced when pagination inits.
+        </div>
+        
+        <form method="get" action="#">
+          <button type="button" id="btnPrev">Previous</button>
+          <button type="button" id="btnSet">Set to 2</button>
+          <button type="button" id="btnNext">Next</button>
+        </form>
+        <!-- Container element for all the Elements that are to be paginated -->
+        <div id="hiddenresult" style="display:none;">
+            <div class="result"><p>Globally maximize granular
+                "outside the box" thinking vis-a-vis quality niches. Proactively formulate 24/7
+                results whereas 2.0 catalysts for change. Professionally implement 24/365 niches
+                rather than client-focused users.</p>
+                <p>
+                Competently engineer high-payoff "outside the box" thinking through cross
+                functional benefits. Proactively transition intermandated processes through
+                open-source niches. Progressively engage maintainable innovation and extensible
+                interfaces.</p>
+            </div>
+            <div class="result"><p>Credibly fabricate e-business models for end-to-end niches.
+                Compellingly disseminate integrated e-markets without ubiquitous services.
+                Credibly create equity invested channels with multidisciplinary human capital.</p>
+                <p>
+                Interactively integrate competitive users rather than fully tested
+                infomediaries. Seamlessly initiate premium functionalities rather than impactful
+                architectures. Rapidiously leverage existing resource-leveling processes via
+                user-centric portals.</p> 
+            </div>
+            <div class="result"><p>Monotonectally initiate unique
+                e-services vis-a-vis client-centric deliverables. Quickly impact parallel
+                opportunities with B2B bandwidth. Synergistically streamline client-focused
+                infrastructures rather than B2C e-commerce.</p>
+                <p>
+                Phosfluorescently fabricate 24/365 e-business through 24/365 total linkage.
+                Completely facilitate high-quality systems without stand-alone strategic theme
+                areas.</p>
+             </div>
+        </div>
+        
+        <div id="footer">
+            Copyright &copy; 2010 by <a href="http://www.d-scribe.de/">describe europe Ltd.</a>.
+        </div>
+    </body>
+</html>
