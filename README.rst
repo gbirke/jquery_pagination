@@ -113,7 +113,9 @@ ellipse_text
 	span tag). Can be left blank to avoid the additional tag. Default: ``...``
 
 load_first_page
-	If true (default) then the first page will be loaded automatically.
+	If true (default) then the callback is executed when the plugin is 
+    initialized. If you load your content with AJAX and already show content
+    whey you initialize the pagination, you should set this to false.
 
 Triggering pagination with custom events
 ----------------------------------------
@@ -167,6 +169,11 @@ Version 2.1
 +++++++++++
 Pagination can now be controlled from you own JavaScript code by triggering
 custom events. See ``demo/demo_events.htm`` for an example.
+
+Version 2.2
++++++++++++
+alexhayes added an option to avoid calling the callback when the plugin is
+initialized.
 
 Future Plans
 ------------
