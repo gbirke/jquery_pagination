@@ -114,8 +114,8 @@ ellipse_text
 
 load_first_page
 	If true (default) then the callback is executed when the plugin is 
-    initialized. If you load your content with AJAX and already show content
-    whey you initialize the pagination, you should set this to false.
+	initialized. If you load your content with AJAX and already show content
+	whey you initialize the pagination, you should set this to false.
 
 Triggering pagination with custom events
 ----------------------------------------
