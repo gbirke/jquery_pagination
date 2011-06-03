@@ -112,6 +112,8 @@ ellipse_text
 	displayed number interval, this text will be inserted into the gap (inside a
 	span tag). Can be left blank to avoid the additional tag. Default: ``...``
 
+load_first_page
+	If true (default) then the first page will be loaded automatically.
 
 Triggering pagination with custom events
 ----------------------------------------

@@ -142,6 +142,7 @@
 			prev_show_always:true,
 			next_show_always:true,
 			renderer:"defaultRenderer",
+			load_first_page:false,
 			callback:function(){return false;}
 		},opts||{});
 		
@@ -222,7 +223,9 @@
 		containers.empty();
 		links.appendTo(containers);
 		// call callback function
-		opts.callback(current_page, containers);
+		if(opts.load_first_page) {
+			opts.callback(current_page, containers);
+		}
 	} // End of $.fn.pagination block
 	
 })(jQuery);
