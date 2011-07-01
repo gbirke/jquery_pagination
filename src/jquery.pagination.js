@@ -101,7 +101,7 @@
 				this.appendRange(fragment, current_page, 0, end, {classes:'sp'});
 				if(this.opts.num_edge_entries < interval.start && this.opts.ellipse_text)
 				{
-					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+					$("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
 				}
 			}
 			// Generate interval links
@@ -111,7 +111,7 @@
 			{
 				if(np-this.opts.num_edge_entries > interval.end && this.opts.ellipse_text)
 				{
-					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+					$("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
 				}
 				begin = Math.max(np-this.opts.num_edge_entries, interval.end);
 				this.appendRange(fragment, current_page, begin, np, {classes:'ep'});
@@ -130,7 +130,7 @@
 	$.fn.pagination = function(maxentries, opts){
 		
 		// Initialize options with default values
-		opts = jQuery.extend({
+		opts = $.extend({
 			items_per_page:10,
 			num_display_entries:11,
 			current_page:0,
