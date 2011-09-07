@@ -142,6 +142,7 @@
 			prev_show_always:true,
 			next_show_always:true,
 			renderer:"defaultRenderer",
+			show_if_single_page:false,
 			load_first_page:false,
 			callback:function(){return false;}
 		},opts||{});
@@ -221,7 +222,9 @@
 		// When all initialisation is done, draw the links
 		links = renderer.getLinks(current_page, paginationClickHandler);
 		containers.empty();
-		links.appendTo(containers);
+		if(np > 1 || opts.show_if_single_page) {
+			links.appendTo(containers);
+		}
 		// call callback function
 		if(opts.load_first_page) {
 			opts.callback(current_page, containers);
