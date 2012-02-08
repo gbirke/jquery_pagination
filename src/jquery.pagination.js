@@ -143,7 +143,7 @@
 			next_show_always:true,
 			renderer:"defaultRenderer",
 			show_if_single_page:false,
-			load_first_page:false,
+			load_first_page:true,
 			callback:function(){return false;}
 		},opts||{});
 		
