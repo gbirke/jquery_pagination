@@ -218,6 +218,11 @@
 				}
 				return false;
 		});
+		containers.bind('currentPage', function(){
+				var current_page = $(this).data('current_page');
+				selectPage(current_page);
+				return false;
+		});
 		
 		// When all initialisation is done, draw the links
 		links = renderer.getLinks(current_page, paginationClickHandler);
