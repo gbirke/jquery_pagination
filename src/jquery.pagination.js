@@ -199,26 +199,26 @@
 		// Attach control events to the DOM elements
 		var pc = new $.PaginationCalculator(maxentries, opts);
 		var np = pc.numPages();
-		containers.bind('setPage', {numPages:np}, function(evt, page_id) { 
+		containers.off('setPage').on('setPage', {numPages:np}, function(evt, page_id) { 
 				if(page_id >= 0 && page_id < evt.data.numPages) {
 					selectPage(page_id); return false;
 				}
 		});
-		containers.bind('prevPage', function(evt){
+		containers.off('prevPage').on('prevPage', function(evt){
 				var current_page = $(this).data('current_page');
 				if (current_page > 0) {
 					selectPage(current_page - 1);
 				}
 				return false;
 		});
-		containers.bind('nextPage', {numPages:np}, function(evt){
+		containers.off('nextPage').on('nextPage', {numPages:np}, function(evt){
 				var current_page = $(this).data('current_page');
 				if(current_page < evt.data.numPages - 1) {
 					selectPage(current_page + 1);
 				}
 				return false;
 		});
-		containers.bind('currentPage', function(){
+		containers.off('currentPage').on('currentPage', function(){
 				var current_page = $(this).data('current_page');
 				selectPage(current_page);
 				return false;
