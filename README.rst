@@ -131,6 +131,8 @@ custom events like this:::
 	$("#News-Pagination").trigger('nextPage');
 	// Go to the previous page
 	$("#News-Pagination").trigger('prevPage');
+	// Refresh the current page
+	$("#News-Pagination").trigger('currentPage');
 
 The event handlers check if the new page number is inside the boundaries of the number of pages and ignore the event if it is outside.
 
