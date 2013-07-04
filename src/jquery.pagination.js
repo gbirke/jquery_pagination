@@ -74,6 +74,7 @@
 					.attr('href', this.opts.link_to.replace(/__id__/,page_id));
 			}
 			if(appendopts.classes){ lnk.addClass(appendopts.classes); }
+			if(appendopts.rel){ lnk.attr('rel', appendopts.rel); }
 			lnk.data('page_id', page_id);
 			return lnk;
 		},
@@ -92,7 +93,7 @@
 			
 			// Generate "Previous"-Link
 			if(this.opts.prev_text && (current_page > 0 || this.opts.prev_show_always)){
-				fragment.append(this.createLink(current_page-1, current_page, {text:this.opts.prev_text, classes:"prev"}));
+				fragment.append(this.createLink(current_page-1, current_page, {text:this.opts.prev_text, classes:"prev",rel:"prev"}));
 			}
 			// Generate starting points
 			if (interval.start > 0 && this.opts.num_edge_entries > 0)
@@ -119,7 +120,7 @@
 			}
 			// Generate "Next"-Link
 			if(this.opts.next_text && (current_page < np-1 || this.opts.next_show_always)){
-				fragment.append(this.createLink(current_page+1, current_page, {text:this.opts.next_text, classes:"next"}));
+				fragment.append(this.createLink(current_page+1, current_page, {text:this.opts.next_text, classes:"next",rel:"next"}));
 			}
 			$('a', fragment).click(eventHandler);
 			return fragment;
