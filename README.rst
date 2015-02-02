@@ -205,9 +205,9 @@ Source code: http://github.com/gbirke/jquery_pagination
 
 You can reach me at:
 
-| describe europe Ltd.
+| Birke Software
 | Gabriel Birke
 | Eckerstr. 6
 | 30161 Hannover
-| birke (at) d-scribe (dot) de
-| http://www.d-scribe.de/
+| gb (at) birke-software (dot) de
+| http://birke-software.de/
